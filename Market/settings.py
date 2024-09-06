@@ -71,6 +71,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Market.wsgi.application'
 
+AUTH_USER_MODEL = 'Cuentas.Cuenta'
+
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
