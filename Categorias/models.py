@@ -8,6 +8,7 @@ class Categorias(models.Model):
     descripcion = models.TextField(max_length=255, blank=True)
     imagen = models.ImageField(upload_to='fotos/categorias', blank=True)
 
+    #correcion de S en categorias
     class Meta:
         verbose_name = "Categoria"
         verbose_name_plural = "Categorias"
@@ -16,3 +17,6 @@ class Categorias(models.Model):
 
     def __str__(self):
         return self.nombre_categoria
+    
+
+    
