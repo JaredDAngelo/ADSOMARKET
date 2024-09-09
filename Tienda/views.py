@@ -1,11 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Producto
+from Categorias.models import Categorias
 
 # Create your views here.
 
-def Tienda(request):
-    productos = Producto.objects.all().filter(esta_disponible=True)
-    producto_contador = productos.count()
+def Tienda(request, categoria_slug=None):
+    categorias = None
+    productos = None
+
+    if categoria_slug != None:
+        categorias = get_object_or_404(Categorias, slug=categoria_slug)
+        productos = Producto.objects.filter(categoria=categorias, esta_disponible= True)
+        producto_contador = productos.count()
+    else:
+        productos = Producto.objects.all().filter(esta_disponible=True)
+        producto_contador = productos.count()
 
     context = {
         'productos': productos,
