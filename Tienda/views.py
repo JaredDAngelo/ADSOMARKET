@@ -21,3 +21,6 @@ def Tienda(request, categoria_slug=None):
         'producto_contador': producto_contador,
     } 
     return render(request, 'Tienda/Tienda.html', context)
+
+def producto_detalles(request, categoria_slug, producto_slug):
+    return render(request, 'Tienda/producto_detalles.html')
