@@ -23,4 +23,12 @@ def Tienda(request, categoria_slug=None):
     return render(request, 'Tienda/Tienda.html', context)
 
 def producto_detalles(request, categoria_slug, producto_slug):
-    return render(request, 'Tienda/producto_detalles.html')
+    try:
+        producto_individual= Producto.objects.get(categoria__slug=categoria_slug , slug=producto_slug)
+    except Exception as e:
+        raise e 
+    
+    context ={
+        'producto_individual': producto_individual,
+    }
+    return render(request, 'Tienda/producto_detalles.html', context)
