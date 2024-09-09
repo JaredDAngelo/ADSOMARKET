@@ -1,7 +1,7 @@
 from django.contrib import admin
-from . models import carrito, carritoItem
+from . models import Carrito, carritoItem
 
 # Register your models here.
 
-admin.site.register(carrito)
+admin.site.register(Carrito)
 admin.site.register(carritoItem)
