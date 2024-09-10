@@ -32,26 +32,26 @@
     <hr>
         <div class="row">
             <div class="item-option-select">
-                <h6>Choose Color</h6>
+                <h6>Cambiar Color</h6>
                 <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
                   <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> Silver
+                    <input type="radio" name="radio_color"> Rojo
                   </label>
                   <label class="btn btn-light">
-                    <input type="radio" name="radio_color" > Gray
+                    <input type="radio" name="radio_color" > Azul
                   </label>
                   <label class="btn btn-light active">
-                    <input type="radio" name="radio_color checked"> Gold
+                    <input type="radio" name="radio_color checked"> Blanco
                   </label>
                   <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> Black
+                    <input type="radio" name="radio_color"> Negro
                   </label>
                 </div> 
             </div>
         </div> <!-- row.// -->
         <div class="row">
             <div class="item-option-select">
-                <h6>Select Size</h6>
+                <h6>Talla </h6>
                 <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
                   <label class="btn btn-light">
                     <input type="radio" name="radio_color"> S
@@ -72,7 +72,7 @@
       {% if producto_individual.stock <= 0 %}
         <h5 class = "text-danger"> Agotado </h5>
         {% else %}
-          <a href="{% url 'agregar_carrito' producto_individual.id %}" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+          <a href="{% url 'agregar_carrito' producto_individual.id %}" class="btn  btn-primary"> <span class="text">Añadir al carrito</span> <i class="fas fa-shopping-cart"></i>  </a>
         {% endif %}
     </article> <!-- product-info-aside .// -->
             </main> <!-- col.// -->
@@ -86,7 +86,7 @@
                 <div class="col-md-9">
     
         <header class="section-heading">
-            <h3>Customer Reviews </h3>  
+            <h3>Reseñas de articulo </h3>  
             
         </header>
     
