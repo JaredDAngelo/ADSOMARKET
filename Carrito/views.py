@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from Tienda.models import Producto
 from .models import Carrito, carritoItem
-from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
+
 
 # Create your views here.
 
-def id_carrito(request):
+def _id_carrito(request):
     carrito = request.session.session_key
     if not carrito:
         carrito = request.session.create()
@@ -14,10 +15,10 @@ def id_carrito(request):
 def agregar_carrito(request, id_producto):
     producto = Producto.objects.get(id=id_producto)
     try:
-        carrito = Carrito.objects.get(id_carrito=id_carrito(request)) # obtenga el carrito usando el id_carrito presente en la sesión
+        carrito = Carrito.objects.get(id_carrito=_id_carrito(request)) # obtenga el carrito usando el id_carrito presente en la sesión
     except Carrito.DoesNotExist:
         carrito = Carrito.objects.create(
-            id_carrito = id_carrito(request),
+            id_carrito = _id_carrito(request)
         )
     carrito.save()
 
@@ -31,10 +32,23 @@ def agregar_carrito(request, id_producto):
             cantidad = 1,
             carrito = carrito,
         )
-        carrito_item.save() 
-    return HttpResponse(carrito_item.producto) # tambien se le puede agregar la cantidad en vez del producto con carrito_item.cantidad
-    exit()
+        carrito_item.save()
     return redirect('carrito')
 
-def carrito(request):
-    return render(request, "Tienda/carrito.html",)
+
+def carrito(request, total=0, cantidad=0, carrito_item=None):
+    try:
+        carrito = Carrito.objects.get(id_carrito=_id_carrito(request))
+        carrito_items = carritoItem.objects.filter(carrito=carrito, activo=True)
+        for carrito_item in carrito_items:
+            total += (carrito_item.producto.precio * carrito_item.cantidad)
+            cantidad += carrito_item.cantidad
+    except ObjectDoesNotExist:
+        pass
+
+    context = {
+        'total' : total,
+        'cantidad' : cantidad,
+        'carrito_items' : carrito_items,
+    }
+    return render(request, "Tienda/carrito.html", context)
