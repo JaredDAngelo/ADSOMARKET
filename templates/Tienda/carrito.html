@@ -9,6 +9,13 @@
 <div class="container">
 
 <!-- ============================ COMPONENT 1 ================================= -->
+{% if not carrito_items %}
+	<h2 class="text-center">Tu Carrrito De Compras Esta Vacio</h2>
+	<br>
+	<div class="text-center">,
+		<a href="{% url 'Tienda' %}"class="btn btn-primary">Continua Comprando</a>
+	</div>
+{% else %}
 
 <div class="row">
 	<aside class="col-lg-9">
@@ -56,7 +63,7 @@
 		</div> <!-- price-wrap .// -->
 	</td>
 	<td class="text-right"> 
-	<a href="{% url 'quitar_carrito_item' carrito_item.producto.id %}" class="btn btn-danger"> Remove</a>
+	<a href="{% url 'quitar_carrito_item' carrito_item.producto.id %}" class="btn btn-danger"> Quitar</a>
 	</td>
 </tr>
 {% endfor %}
@@ -94,6 +101,7 @@
 
 
 </div> <!-- row.// -->
+{% endif %}
 <!-- ============================ COMPONENT 1 END .// ================================= -->
 
 </div> <!-- container .//  -->
