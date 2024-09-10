@@ -143,7 +143,7 @@
                             <span class="price">${{ Producto.precio }}</span>
                         </div> <!-- price-wrap.// -->
                     </div>
-                    <a href="#" class="btn btn-block btn-primary">Agregar al carrito </a>
+                    <a href="{% url 'agregar_carrito' Producto.id %}" class="btn btn-block btn-primary">Agregar al carrito </a>
                 </figcaption>
             </figure>
         </div> <!-- col.// -->

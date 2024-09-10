@@ -37,7 +37,7 @@
 		<figure class="itemside align-items-center">
 			<div class="aside"><img src="{{ carrito_item.producto.Imagen.url }}" class="img-sm"></div>
 			<figcaption class="info">
-				<a href="#" class="title text-dark">{{ carrito_item.producto.producto_nombre }}</a>
+				<a href="{{ carrito_item.producto.get_url }}" class="title text-dark">{{ carrito_item.producto.producto_nombre }}</a>
 				<p class="text-muted small">Color: 25 Mpx <br> Siza: Canon</p>
 			</figcaption>
 		</figure>
@@ -93,7 +93,7 @@
 				<img src="{% static './images/misc/payments.png' %}" height="26">
 			</p>
 			<a href="./place-order.html" class="btn btn-primary btn-block"> Pagar </a>
-			<a href="./store.html" class="btn btn-light btn-block">Continuar Comprando</a>
+			<a href="{% url 'Tienda' %}" class="btn btn-light btn-block">Continuar Comprando</a>
 		</div> <!-- card-body.// -->
 		</div> <!-- card.// -->
 

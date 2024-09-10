@@ -72,8 +72,13 @@
       {% if producto_individual.stock <= 0 %}
         <h5 class = "text-danger"> Agotado </h5>
         {% else %}
+          {% if en_carrito %}
+          <a href="#" class="btn  btn-success"> <span class="text">Ya Esta En El Carrito</span> <i class="fas fa-check"></i>  </a>
+          <a href="{% url 'carrito' %}" class="btn  btn-outline-primary"> <span class="text">Ver Tu Carrito</span> <i class="fas fa-eye"></i>  </a>
+          {% else %}
           <a href="{% url 'agregar_carrito' producto_individual.id %}" class="btn  btn-primary"> <span class="text">Añadir al carrito</span> <i class="fas fa-shopping-cart"></i>  </a>
-        {% endif %}
+          {% endif %}
+      {% endif %}
     </article> <!-- product-info-aside .// -->
             </main> <!-- col.// -->
         </div> <!-- row.// -->
