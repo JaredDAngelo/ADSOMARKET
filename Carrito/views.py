@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from Tienda.models import Producto
 from .models import Carrito, carritoItem
 from django.core.exceptions import ObjectDoesNotExist
@@ -35,6 +35,23 @@ def agregar_carrito(request, id_producto):
         carrito_item.save()
     return redirect('carrito')
 
+def quitar_carrito(request, id_producto):
+    carrito = Carrito.objects.get(id_carrito=_id_carrito(request))
+    producto = get_object_or_404(Producto, id=id_producto)
+    carrito_item = carritoItem.objects.get(producto=producto, carrito=carrito)
+    if carrito_item.cantidad > 1:
+        carrito_item.cantidad -= 1
+        carrito_item.save()
+    else:
+        carrito_item.delete()
+    return redirect('carrito')
+
+def quitar_carrito_item(request, id_producto):
+    carrito = Carrito.objects.get(id_carrito=_id_carrito(request))
+    producto = get_object_or_404(Producto, id=id_producto)
+    carrito_item = carritoItem.objects.get(producto=producto, carrito=carrito)
+    carrito_item.delete()
+    return redirect('carrito')
 
 def carrito(request, total=0, cantidad=0, carrito_item=None):
     try:
@@ -43,6 +60,10 @@ def carrito(request, total=0, cantidad=0, carrito_item=None):
         for carrito_item in carrito_items:
             total += (carrito_item.producto.precio * carrito_item.cantidad)
             cantidad += carrito_item.cantidad
+
+        iva = int(0.19 * total)
+        grand_total = int(total + iva)
+        
     except ObjectDoesNotExist:
         pass
 
@@ -50,5 +71,7 @@ def carrito(request, total=0, cantidad=0, carrito_item=None):
         'total' : total,
         'cantidad' : cantidad,
         'carrito_items' : carrito_items,
+        'iva'           : iva,
+        'grand_total'   : grand_total,
     }
     return render(request, "Tienda/carrito.html", context)
