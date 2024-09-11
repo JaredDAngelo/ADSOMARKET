@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from Tienda.models import Producto
 from .models import Carrito, carritoItem
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -13,6 +14,11 @@ def _id_carrito(request):
     return carrito
 
 def agregar_carrito(request, id_producto):
+    color = request.GET['color']
+    size = request.GET['size']
+    return HttpResponse(color + ' ' + size)
+    exit()
+
     producto = Producto.objects.get(id=id_producto)
     try:
         carrito = Carrito.objects.get(id_carrito=_id_carrito(request)) # obtenga el carrito usando el id_carrito presente en la sesión
@@ -55,6 +61,8 @@ def quitar_carrito_item(request, id_producto):
 
 def carrito(request, total=0, cantidad=0, carrito_item=None):
     try:
+        iva = 0
+        grand_total = 0
         carrito = Carrito.objects.get(id_carrito=_id_carrito(request))
         carrito_items = carritoItem.objects.filter(carrito=carrito, activo=True)
         for carrito_item in carrito_items:
