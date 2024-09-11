@@ -66,7 +66,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'Categorias.context_processors.menu_links', #estos enlaces de menus los usaremos en todas las plantillas
+                'Categorias.context_processors.menu_links',
+                'Carrito.context_processors.counter', #estos enlaces de menus los usaremos en todas las plantillas
             ],
         },
     },
