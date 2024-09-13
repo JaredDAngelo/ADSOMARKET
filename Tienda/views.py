@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import Producto
 from Categorias.models import Categorias
 from Carrito.models import carritoItem
+from django.http import HttpResponse
+from django.db.models import Q
 
 from Carrito.views import _id_carrito
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -49,4 +51,15 @@ def producto_detalles(request, categoria_slug, producto_slug):
     }
     return render(request, 'Tienda/producto_detalles.html', context)
 
-###
+
+def buscar(request):
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            productos = Producto.objects.order_by('-crear_fecha').filter(Q(descripcion__icontains=keyword) | Q(producto_nombre__icontains=keyword))
+            producto_contador = productos.count()
+    context = {
+        'productos': productos,
+        'producto_contador': producto_contador,
+    }
+    return render(request, 'Tienda/Tienda.html', context)

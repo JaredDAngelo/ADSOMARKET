@@ -14,11 +14,6 @@ def _id_carrito(request):
     return carrito
 
 def agregar_carrito(request, id_producto):
-    color = request.GET['color']
-    size = request.GET['size']
-    return HttpResponse(color + ' ' + size)
-    exit()
-
     producto = Producto.objects.get(id=id_producto)
     try:
         carrito = Carrito.objects.get(id_carrito=_id_carrito(request)) # obtenga el carrito usando el id_carrito presente en la sesión
