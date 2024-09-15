@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+
+    <!-- ============================ COMPONENT REGISTER   ================================= -->
+        <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+          <article class="card-body">
+            <header class="mb-4"><h4 class="card-title">Registro</h4></header>
+            <form action="{% url 'registro' %}" method="POST">
+                {% csrf_token %}
+
+ 
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <label>Nombres</label>
+                              {{ form.nombre }}
+                        </div> <!-- form-group end.// -->
+                        <div class="col form-group">
+                            <label>Apellidos</label>
+                              {{ form.apellido }}
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row end.// -->
+                    <div class="form-group">
+                        <label>Correo</label>
+                          {{ form.correo }}
+                        <small class="form-text text-muted">Nunca compartiremos tu correo electrónico con nadie más.</small>
+                    </div> <!-- form-group end.// -->
+                    <div class="form-row">
+                      <div class="col form-group">
+                          <label>Telefono</label>
+                            {{ form.telefono }}
+                      </div> <!-- form-group end.// -->
+                      <div class="col form-group">
+                          <label>Username</label>
+                            {{ form.username }}
+                      </div> <!-- form-group end.// -->
+                  </div> <!-- form-row end.// -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label>Ciudad</label>
+                          {{ form.ciudad }}
+                        </div> <!-- form-group end.// -->
+                        <div class="form-group col-md-6">
+                          <label>Departamento</label>
+                          <select id="inputState" class="form-control">
+                            <option> Elegir...</option>
+                              <option>Amazonas</option>
+                              <option>Antioquia</option>
+                              <option>Arauca</option>
+                              <option>Atlántico</option>
+                              <option>Bolívar</option>
+                              <option selected="" >Caldas</option>
+                              <option>Caquetá</option>
+                              <option>Casanare</option>
+                              <option>Cauca</option>
+                              <option>Cesar</option>
+                              <option>Chocó</option>
+                              <option>Córdoba</option>
+                              <option>Cundinamarca</option>
+                              <option>Guainía</option>
+                              <option>Guaviare</option>
+                              <option>Huila</option>
+                              <option>La Guajira</option>
+                              <option>Magdalena</option>
+                              <option>Meta</option>
+                              <option>Nariño</option>
+                              <option>Norte de Santander</option>
+                              <option>Putumayo</option>
+                              <option>Quindío</option>
+                              <option>Risaralda</option>
+                              <option>San Andrés y Providencia</option>
+                              <option>Santander</option>
+                              <option>Sucre</option>
+                              <option>Tolima</option>
+                              <option>Valle del Cauca</option>
+                              <option>Vaupés</option>
+                              <option>Vichada</option>
+                          </select>
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row.// -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Contraseña</label>
+                            {{ form.contraseña }}
+                        </div> <!-- form-group end.// --> 
+                        <div class="form-group col-md-6">
+                            <label>Confrimar Contraseña</label>
+                            {{ form.confirmar_contraseña }}
+                        </div> <!-- form-group end.// -->  
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Registrate  </button>
+                    </div> <!-- form-group// -->      
+                        
+                </form>
+            </article><!-- card-body.// -->
+        </div> <!-- card .// -->
+        <p class="text-center mt-4">Ya tienes una cuenta? <a href="">Ingresar</a></p>
+        <br><br>
+    <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+    
+    
+    </section>+
+
+{% endblock %}

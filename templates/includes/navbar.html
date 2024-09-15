@@ -64,8 +64,8 @@
                         <div class="widget-header">
                             <small class="title text-muted">Bienvenido a ADSOMarket!</small>
                             <div> 
-                                <a href="{% static './signin.html' %}">Ingresar</a> <span class="dark-transp"> | </span>
-                                <a href="{% static './register.html' %}"> Registrarse</a>
+                                <a href="{% url 'login' %}">Ingresar</a> <span class="dark-transp"> | </span>
+                                <a href="{% url 'registro' %}"> Registrarse</a>
                             </div>
                         </div>
                         <a href="{% url 'carrito' %}" class="widget-header pl-3 ml-3">

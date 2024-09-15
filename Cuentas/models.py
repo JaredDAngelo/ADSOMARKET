@@ -42,8 +42,10 @@ class CuentaGerente(BaseUserManager):
 class Cuenta(AbstractBaseUser):
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
-    username = models.CharField(max_length=100, unique=True)
     correo = models.EmailField(max_length=100, unique=True)
+    username = models.CharField(max_length=100, unique=True)
+    ciudad = models.CharField(max_length=50)
+    departamento = models.CharField(max_length=100)
     telefono = models.CharField(max_length=50)
 
     #required
