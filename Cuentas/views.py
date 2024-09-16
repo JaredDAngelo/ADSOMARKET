@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import FormularioRegistro
 from .models import Cuenta
+from django.contrib import messages
 
 
 def registro(request):
@@ -25,6 +26,8 @@ def registro(request):
                 password=contraseña
             )
             usuario.save()
+            messages.success(request, 'Registro Exitoso! ')
+            return redirect('registro')
     else:
         form = FormularioRegistro()
     context = {
