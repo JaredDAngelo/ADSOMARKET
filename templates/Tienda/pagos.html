@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+<section class="section-content padding-y bg">
+<div class="container">
+
+<!-- ============================ COMPONENT 1 ================================= -->
+
+<div class="row">
+	<aside class="col-lg-6">
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-tittle mb-4">Direccion de Envio</h4>
+        <form action="">
+            <div class="form-row">
+                <div class="col form-group">
+                    <label for="">Nombre</label>
+                    <input type="text" name="nombre" class="form-control" required>
+            </div>
+            <div class="form-form"></div>
+                <div class="col form-group">
+                    <label for="">Apellido</label>
+                    <input type="text" name="apellido" class="form-control" required>
+            </div>
+            </div>
+            <div class="form-row">
+                <div class="col form-group">
+                    <label for="">Correo Electronico</label>
+                    <input type="email" name="correo" class="form-control" required>
+            </div>
+            <div class="form-form"></div>
+                <div class="col form-group">
+                    <label for="">Telefono</label>
+                    <input type="text" name="telefono" class="form-control" required>
+            </div>
+            </div>
+            <div class="form-row">
+                <div class="col form-group">
+                    <label for="">Direccion 1</label>
+                    <input type="text" name="direccion" class="form-control" required>
+            </div>
+            <div class="form-form"></div>
+                <div class="col form-group">
+                    <label for="">Direccion 2</label>
+                    <input type="text" name="telefono" class="form-control">
+            </div>
+            </div>
+            <div class="form-row">
+                <div class="col form-group">
+                    <label for="">Ciudad</label>
+                    <input type="text" name="ciudad" class="form-control" required>
+            </div>
+            <div class="form-form"></div>
+                <div class="col form-group">
+                    <label for="">Departamento</label>
+                    <input type="text" name="departamento" class="form-control">
+            </div>
+            </div>  
+            <div class="form-row">
+                <label for="">Informacion Detallada</label>
+                <textarea name="order_note" id="2" class="form-control"></textarea>
+            </div>
+        </form>
+    </div>
+</div> <!-- card.// -->
+
+	</aside> <!-- col.// -->
+	<aside class="col-lg-6">
+
+		<div class="card">
+		<div class="card-body">
+        <table class="table table-borderless table-shopping-cart">
+            <thead class="text-muted">
+            <tr class="small text-uppercase">
+                <th scope="col">Productos</th>
+                <th scope="col" width="120">Cantidad</th>
+                <th scope="col" width="120">Precio</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            {% for carrito_item in carrito_items %}
+            <tr>
+                <td>
+                    <figure class="itemside align-items-center">
+                        <div class="aside"><img src="{{ carrito_item.producto.Imagen.url }}" class="img-sm"></div>
+                        <figcaption class="info">
+                            <a href="{{ carrito_item.producto.get_url }}" class="title text-dark">{{ carrito_item.producto.producto_nombre }}</a>
+                            <p class="text-muted small">Color: 25 Mpx <br> Siza: Canon</p>
+                        </figcaption>
+                    </figure>
+                </td>
+                <td> 
+                    <!-- col.// -->
+                     <label for="">{{carrito_item.cantidad}}</label>
+                </td>
+                <td> 
+                    <div class="price-wrap"> 
+                        <var class="price"> $ {{ carrito_item.sub_total }}</var> 
+                        <small class="text-muted"> $ {{ carrito_item.producto.precio }} cada uno</small> 
+                    </div> <!-- price-wrap .// -->
+                </td>
+            </tr>
+            {% endfor %}
+            
+            </tbody>
+            </table>
+			<a href="{% url 'pagos' %}" class="btn btn-primary btn-block"> Comprar Ahora </a>
+			<a href="{% url 'Tienda' %}" class="btn btn-light btn-block">Continuar Comprando</a>
+		</div> <!-- card-body.// -->
+		</div> <!-- card.// -->
+
+</aside> <!-- col.// -->
+
+
+</div> <!-- row.// -->
+
+<!-- ============================ COMPONENT 1 END .// ================================= -->
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}
