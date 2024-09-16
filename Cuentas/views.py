@@ -46,7 +46,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'Ingreso Exitoso')
-            return redirect('home')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Datos de ingreso incorrectos')
             return redirect('login')
@@ -57,3 +57,7 @@ def logout(request):
     auth.logout(request)
     messages.success(request, 'Sesion finalizada.') 
     return redirect('login')
+
+@login_required(login_url = 'login')
+def dashboard(request):
+    return render(request, 'Cuentas/dashboard.html')

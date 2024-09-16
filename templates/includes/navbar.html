@@ -73,7 +73,7 @@
                         <div class="widget-header"></div>
                             <small class="title text-muted">Bienvenido {{ user.nombre }} a ADSOMarket!</small>
                             <div> 
-                                <a href="#">Dasboard</a> <span class="dark-transp"> | </span>
+                                <a href="{% url 'dashboard' %}">Mi Cuenta</a> <span class="dark-transp"> | </span>
                                 <a href="{% url 'logout' %}"> Cerrar Sesion </a>
                             </div>
                         </div>
