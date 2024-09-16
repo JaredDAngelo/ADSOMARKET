@@ -1,9 +1,32 @@
 from django.shortcuts import render
 from .forms import FormularioRegistro
+from .models import Cuenta
 
 
 def registro(request):
-    form = FormularioRegistro()
+    if request.method == 'POST':
+        form = FormularioRegistro(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            apellido = form.cleaned_data['apellido']
+            correo = form.cleaned_data['correo']
+            username = form.cleaned_data['username']
+            ciudad = form.cleaned_data['ciudad']
+            telefono = form.cleaned_data['telefono']
+            contraseña = form.cleaned_data['contraseña']
+
+            usuario = Cuenta.objects.create_user(
+                nombre=nombre,
+                apellido=apellido,
+                correo=correo,
+                username=username,
+                ciudad=ciudad,
+                telefono=telefono,
+                password=contraseña
+            )
+            usuario.save()
+    else:
+        form = FormularioRegistro()
     context = {
         'form': form,
     }

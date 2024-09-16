@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 # Create your models here.
 
 class CuentaGerente(BaseUserManager):
-    def create_user(self, nombre, apellido, username, correo, password=None):
+    def create_user(self, nombre, apellido, username, correo, ciudad, telefono, password=None):
         if not correo:
             raise ValueError("El usuario debe tener una dirección de correo electrónico")
         
@@ -16,6 +16,8 @@ class CuentaGerente(BaseUserManager):
             username = username,
             nombre = nombre,
             apellido = apellido,
+            telefono = telefono,
+            ciudad = ciudad,
         )
 
         usuario.set_password(password)
