@@ -60,4 +60,4 @@ def logout(request):
 
 @login_required(login_url = 'login')
 def dashboard(request):
-    return render(request, 'Cuentas/dashboard.html')
+    return render(request, 'Tienda/pagos.html')

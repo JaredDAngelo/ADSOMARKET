@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from Tienda.models import Producto
 from .models import Carrito, carritoItem
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -54,7 +54,7 @@ def quitar_carrito_item(request, id_producto):
     carrito_item.delete()
     return redirect('carrito')
 
-def carrito(request, total=0, cantidad=0, carrito_item=None):
+def carrito(request, total=0, cantidad=0, carrito_items=None):
     try:
         iva = 0
         grand_total = 0
@@ -79,7 +79,9 @@ def carrito(request, total=0, cantidad=0, carrito_item=None):
     }
     return render(request, "Tienda/carrito.html", context)
 
-def pagar(request, total=0, cantidad=0, carrito_item=None):
+@login_required(login_url="login")
+
+def pagar(request, total=0, cantidad=0, carrito_items=None):
     try:
         iva = 0
         grand_total = 0
