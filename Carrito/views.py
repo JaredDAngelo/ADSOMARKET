@@ -105,3 +105,28 @@ def pagar(request, total=0, cantidad=0, carrito_items=None):
         'grand_total'   : grand_total,
     }
     return render(request, 'Tienda/pagos.html', context)
+
+def factura(request, total=0, cantidad=0, carrito_items=None):
+    try:
+        iva = 0
+        grand_total = 0
+        carrito = Carrito.objects.get(id_carrito=_id_carrito(request))
+        carrito_items = carritoItem.objects.filter(carrito=carrito, activo=True)
+        for carrito_item in carrito_items:
+            total += (carrito_item.producto.precio * carrito_item.cantidad)
+            cantidad += carrito_item.cantidad
+
+        iva = int(0.19 * total)
+        grand_total = int(total + iva)
+        
+    except ObjectDoesNotExist:
+        pass
+
+    context = {
+        'total' : total,
+        'cantidad' : cantidad,
+        'carrito_items' : carrito_items,
+        'iva'           : iva,
+        'grand_total'   : grand_total,
+    }
+    return render(request, 'Tienda/factura.html', context)
